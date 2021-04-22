@@ -1,0 +1,22 @@
+long long numberOfWays(int coins[],int numberOfCoins,int value)
+    {
+        long long dp[value+1][numberOfCoins+1];
+        
+        for(int i=0;i<=numberOfCoins;i++)
+            dp[0][i]=1;
+        for(int i=1;i<=value;i++)
+            dp[i][0]=0;
+        
+        for(int i=1;i<=value;i++)
+        {
+            for(int j=1;j<=numberOfCoins;j++)
+            {
+                dp[i][j] = dp[i][j-1];
+                if(i>=coins[j-1])
+                    dp[i][j] += dp[i-coins[j-1]][j];
+            }
+        }
+        return dp[value][numberOfCoins];
+        
+        
+    }
